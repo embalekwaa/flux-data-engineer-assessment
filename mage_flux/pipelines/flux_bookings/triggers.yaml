@@ -1,0 +1,9 @@
+triggers:
+- name: daily_bookings
+  pipeline_uuid: flux_bookings
+  schedule_type: time
+  schedule_interval: '@daily'
+  start_time: 2025-09-01 06:00:00
+  status: active
+  variables:
+    force: false

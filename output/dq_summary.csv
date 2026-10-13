@@ -1,0 +1,27 @@
+check,scope,value,status,detail
+reject_rate,bookings_batch1_2025-09-01,0.0264,PASS,"7/265 rows quarantined (warn>0.05, fail>0.2)"
+same_updated_at_conflicts,bookings_batch1_2025-09-01,1.0,WARN,versions with equal updated_at but different content; resolved by batch date then file row
+reject_rate,bookings_batch2_2025-09-02,0.025,PASS,"1/40 rows quarantined (warn>0.05, fail>0.2)"
+same_updated_at_conflicts,bookings_batch2_2025-09-02,0.0,PASS,versions with equal updated_at but different content; resolved by batch date then file row
+rejected:check_out_not_after_check_in,all_batches,2.0,INFO,
+rejected:invalid_num_guests,all_batches,2.0,INFO,
+rejected:missing_or_bad_revenue,all_batches,1.0,INFO,
+rejected:non_positive_revenue,all_batches,2.0,INFO,
+rejected:unknown_currency_or_no_fx_rate,all_batches,1.0,INFO,
+rejected:unknown_property,all_batches,1.0,INFO,
+rejected:updated_at_before_created_at,all_batches,1.0,INFO,
+duplicate_current_booking_ids,analysis_ready,0.0,PASS,must be exactly one row per booking_id
+null_revenue_zar,analysis_ready,0.0,PASS,
+null_fx_rate_to_zar,analysis_ready,0.0,PASS,
+null_property_name,analysis_ready,0.0,PASS,
+null_check_in_date,analysis_ready,0.0,PASS,
+non_positive_revenue_zar,analysis_ready,0.0,PASS,
+invalid_date_ranges,analysis_ready,0.0,PASS,
+warning:created_after_batch_date,analysis_ready,15.0,INFO,
+warning:property_not_active,analysis_ready,28.0,INFO,
+warning:revenue_not_rate_x_nights,analysis_ready,4.0,INFO,
+row_count,analysis_ready,275.0,INFO,
+status:cancelled,analysis_ready,35.0,INFO,
+status:confirmed,analysis_ready,213.0,INFO,
+status:pending,analysis_ready,27.0,INFO,
+recognised_revenue_zar_total,analysis_ready,118170050.0,INFO,

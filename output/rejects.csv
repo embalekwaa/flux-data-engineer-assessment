@@ -1,0 +1,9 @@
+booking_id,property_id,check_in,check_out,num_guests,room_rate,currency,revenue,booking_channel,booking_status,created_at,updated_at,_batch_id,_batch_date,_source_row,reject_reasons
+B9001,P002,2025-06-10,2025-06-03,2,5500,USD,38500,Direct,confirmed,2025-05-01 09:00:00,2025-05-01 09:00:00,bookings_batch1_2025-09-01,2025-09-01 00:00:00,258,check_out_not_after_check_in
+B9002,P003,2025-07-01,2025-07-04,2,4100,EUR,-12300,OTA,confirmed,2025-06-01 10:00:00,2025-06-01 10:00:00,bookings_batch1_2025-09-01,2025-09-01 00:00:00,259,non_positive_revenue
+B9003,P004,2025-08-15,2025-08-15,2,9200,USD,0,Website,confirmed,2025-07-20 12:00:00,2025-07-20 12:00:00,bookings_batch1_2025-09-01,2025-09-01 00:00:00,260,check_out_not_after_check_in;non_positive_revenue
+B9004,P005,2025-09-01,2025-09-05,,7800,ZAR,,Travel Agent,confirmed,2025-08-01 08:00:00,2025-08-01 08:00:00,bookings_batch1_2025-09-01,2025-09-01 00:00:00,261,missing_or_bad_revenue;invalid_num_guests
+B9005,P001,2025-10-01,2025-10-03,99,3200,USD,6400,direct ,confirmed,2025-09-01 07:30:00,2025-09-01 07:30:00,bookings_batch1_2025-09-01,2025-09-01 00:00:00,262,invalid_num_guests
+B9006,P099,2025-11-01,2025-11-04,2,4100,GBP,12300,OTA,confirmed,2025-10-01 11:00:00,2025-10-01 11:00:00,bookings_batch1_2025-09-01,2025-09-01 00:00:00,263,unknown_property
+B9007,P006,2025-11-10,2025-11-12,2,5500,XYZ,11000,Website,confirmed,2025-10-15 14:00:00,2025-10-15 14:00:00,bookings_batch1_2025-09-01,2025-09-01 00:00:00,264,unknown_currency_or_no_fx_rate
+B1059,P007,2025-06-25,2025-06-30,3,4100,£,41000,travel agent,confirmed,2025-04-30 00:00:00,2025-03-31 00:00:00,bookings_batch2_2025-09-02,2025-09-02 00:00:00,40,updated_at_before_created_at

@@ -1,0 +1,9 @@
+country,revenue_rank,property_id,property_name,revenue_zar,confirmed_bookings
+Botswana,1,P004,Okavango Delta Camp,11081760.0,21.0
+Kenya,1,P010,Maasai Mara Tented Camp,6334270.0,14.0
+Namibia,1,P007,Namib Desert Camp,13561710.0,24.0
+South Africa,1,P009,Cape Winelands Manor,20728120.0,26.0
+South Africa,2,P002,Table Bay Retreat,15953380.0,22.0
+Tanzania,1,P005,Zanzibar Beach Villas,12603260.0,29.0
+Tanzania,2,P003,Serengeti Plains Camp,6257090.0,16.0
+Zimbabwe,1,P006,Victoria Falls Lodge,12426420.0,23.0

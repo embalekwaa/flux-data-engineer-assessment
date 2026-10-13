@@ -1,0 +1,18 @@
+check_name,severity,failing,description
+raw_row_count,info,305.0,rows landed across all batches
+exact_duplicate_rows,warn,6.0,identical re-sent rows (merge treats them as no-ops)
+booking_ids_with_multiple_rows,info,23.0,extra rows beyond one per booking_id
+duplicate_current_version_ids,warn,7.0,ids with >1 row at the latest updated_at (dedup needs a tie-break)
+conflicting_current_versions,error,1.0,ties at the latest updated_at whose content differs
+orphan_property_ids,error,1.0,property_id not in properties dimension
+missing_revenue,error,1.0,null or unparseable revenue
+non_positive_revenue,error,2.0,revenue <= 0
+unparseable_stay_dates,error,0.0,check_in/check_out matching none of the known formats
+invalid_date_ranges,error,2.0,check_out on or before check_in
+invalid_num_guests,error,2.0,guests missing or outside 1-12
+updated_before_created,error,1.0,updated_at earlier than created_at
+unknown_currency,error,1.0,currency not in fx_rates after standardisation
+no_applicable_fx_rate,error,1.0,no FX rate effective on created_at date (incl. unknown currency)
+non_canonical_channel_values,warn,205.0,channel needs standardising (case/whitespace/punctuation)
+non_iso_currency_values,warn,202.0,currency given as symbol or wrong case
+fct_duplicate_booking_ids,error,0.0,post-load assertion: fact must have one row per booking

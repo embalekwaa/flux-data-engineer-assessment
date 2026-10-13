@@ -1,0 +1,5 @@
+run_id,_batch_id,batch_date,file_sha256,rows_read,rows_rejected,rows_valid,intra_batch_superseded,inserted,updated,unchanged,stale_ignored,same_updated_at_conflicts
+20261013T060058Z,bookings_batch1_2025-09-01,2025-09-01,19f7914252c8fc8eaf448dde5ee192acba9f9233e58f99afeeee93fe0ef42f9c,265,7,258,2,256,0,0,0,1
+20261013T060058Z,bookings_batch2_2025-09-02,2025-09-02,cc073cba0ce8b0002aefeb7cb076427e25d8fc67c7493ee37029dbe3cff09351,40,1,39,0,19,15,5,0,0
+20261013T060101Z,bookings_batch1_2025-09-01,2025-09-01,19f7914252c8fc8eaf448dde5ee192acba9f9233e58f99afeeee93fe0ef42f9c,265,7,258,2,0,0,241,15,1
+20261013T060101Z,bookings_batch2_2025-09-02,2025-09-02,cc073cba0ce8b0002aefeb7cb076427e25d8fc67c7493ee37029dbe3cff09351,40,1,39,0,0,0,39,0,0

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.tmp
+# local merge state (rebuilt by the pipeline); outputs/ is committed as the deliverable
+state/
+# assessment brief is Flux's document, not part of the submission
+*.pdf

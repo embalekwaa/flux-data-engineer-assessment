@@ -1,0 +1,11 @@
+property_id,property_name,country,region,room_count,property_status
+P001,Sabi Sands Bush Lodge,South Africa,Mpumalanga,18,active
+P002,Table Bay Retreat,South Africa,Western Cape,42,active
+P003,Serengeti Plains Camp,Tanzania,Serengeti,12,active
+P004,Okavango Delta Camp,Botswana,North-West,9,active
+P005,Zanzibar Beach Villas,Tanzania,Zanzibar,24,active
+P006,Victoria Falls Lodge,Zimbabwe,Matabeleland,30,active
+P007,Namib Desert Camp,Namibia,Erongo,10,active
+P008,Kruger Gateway Hotel,S. Africa,Mpumalanga,60,active
+P009,Cape Winelands Manor,South Africa,Western Cape,15,renovation
+P010,Maasai Mara Tented Camp,Kenya,Rift Valley,14,active

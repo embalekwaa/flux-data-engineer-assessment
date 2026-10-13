@@ -1,0 +1,53 @@
+# Flux bookings pipeline configuration.
+# Paths are relative to the project root unless absolute.
+
+paths:
+  raw_dir: data/raw
+  batch_glob: "bookings_batch*_*.csv"   # batch date is parsed from the YYYY-MM-DD suffix
+  properties_file: data/raw/properties.csv
+  fx_rates_file: data/raw/fx_rates.csv
+  state_dir: state                       # current-state store + processed-batch manifest
+  output_dir: output
+
+source:
+  encoding: utf-8
+  # Accepted check_in / check_out formats, tried in order (day-first: no slash
+  # date in the data has a month component > 12, but 34 have a day > 12).
+  stay_date_formats: ["%Y-%m-%d", "%d/%m/%Y", "%d %b %Y"]
+  timestamp_format: "%Y-%m-%d %H:%M:%S"
+
+standardise:
+  # Keys are compared after strip + upper-case.
+  currency_map:
+    "€": EUR
+    "£": GBP
+    "$": USD          # assumption: bare "$" is USD (only USD-dollar currency in fx_rates)
+    "US$": USD
+    "R": ZAR
+  # Keys are compared after lower-casing and removing everything except letters.
+  channel_map:
+    direct: Direct
+    website: Website
+    ota: OTA
+    travelagent: Travel Agent
+  status_map:
+    confirmed: confirmed
+    pending: pending
+    cancelled: cancelled
+    canceled: cancelled
+  country_map:
+    "S. Africa": South Africa
+    "SA": South Africa
+
+validation:
+  min_guests: 1
+  max_guests: 12               # largest plausible party for a single lodge booking
+  max_nights: 60
+  # created_at later than the batch file date: true = quarantine, false = warn only.
+  # Default false: 13 otherwise-clean batch-1 rows and batch-2 updated_at values
+  # post-date their file dates, so the file date looks like a label, not a cut-off.
+  reject_created_after_batch_date: false
+
+dq_thresholds:
+  max_reject_rate_warn: 0.05   # share of a batch's rows quarantined before we WARN
+  max_reject_rate_fail: 0.20   # ... before the run FAILs (non-zero exit)

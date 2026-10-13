@@ -58,7 +58,7 @@ def replace_partition(table: pd.DataFrame, new_rows: pd.DataFrame, batch_id: str
 
 
 def new_run_id() -> str:
-    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")   # unique per run
 
 
 # --- step 1: ingest ---------------------------------------------------------

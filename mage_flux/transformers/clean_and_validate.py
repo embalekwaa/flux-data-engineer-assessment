@@ -2,6 +2,11 @@
 
 Bad rows aren't dropped here; each row gets a `_reject_reasons` value
 ('' means the row is fine).
+
+Quality gate: if a batch has too many bad rows, this block raises an error,
+which stops the pipeline *before* the merge. (It raises instead of using a
+@test because a block error always blocks downstream blocks, in every way
+Mage can run a pipeline.)
 """
 from flux_pipeline import io
 from flux_pipeline.config import load_config
@@ -16,13 +21,16 @@ if 'test' not in globals():
 @transformer
 def transform(data, *args, **kwargs):
     cfg = load_config()
-    return clean_and_validate(data, cfg, io.read_fx_rates(cfg), io.read_properties(cfg))
+    checked = clean_and_validate(data, cfg, io.read_fx_rates(cfg), io.read_properties(cfg))
+
+    rates = reject_rate(checked)
+    too_high = rates[rates > cfg.max_reject_rate_fail]
+    if not too_high.empty:
+        raise ValueError(f'Too many bad rows (limit {cfg.max_reject_rate_fail:.0%}), '
+                         f'stopping before merge: {too_high.round(3).to_dict()}')
+    return checked
 
 
 @test
-def test_reject_rate_below_limit(output, *args) -> None:
-    """Quality gate: if a batch is mostly bad rows, stop here, before the merge."""
-    limit = load_config().max_reject_rate_fail
-    rates = reject_rate(output)
-    too_high = rates[rates > limit]
-    assert too_high.empty, f'Too many bad rows (limit {limit:.0%}): {too_high.round(3).to_dict()}'
+def test_output(output, *args) -> None:
+    assert '_reject_reasons' in output.columns or output.empty, 'Validation did not run'

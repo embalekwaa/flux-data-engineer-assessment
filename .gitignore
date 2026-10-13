@@ -7,3 +7,4 @@ __pycache__/
 state/
 # assessment brief is Flux's document, not part of the submission
 *.pdf
+!docs/PART_C_production.pdf

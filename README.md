@@ -33,6 +33,37 @@ pytest                                    # run the tests
 If any data-quality check marked `FAIL` is hit, the pipeline exits with code 1.
 That lets a scheduler stop the run before bad data reaches reporting.
 
+## Running it in Mage AI
+
+The same pipeline also runs as a Mage pipeline, `flux_bookings`, in
+`mage_flux/`. Each step is one Mage block, and every block calls the same
+Python functions as the command-line version, so the logic exists only once.
+
+```
+load_new_batches ─► clean_and_validate ─► merge_into_current_state ─► publish_outputs
+  (data loader)       (transformer)          (transformer)              (data exporter)
+```
+
+| Block | What it does | Built-in check |
+|---|---|---|
+| `load_new_batches` | Reads batch files that haven't been processed yet | Something was returned |
+| `clean_and_validate` | Cleans the rows, adds FX and property details, flags bad rows | **Quality gate:** stops the run if more than 20% of a batch is bad, *before* anything is merged |
+| `merge_into_current_state` | Keeps the newest version of each booking and saves the state | Merge counts add up |
+| `publish_outputs` | Writes the output files | Fails the run if any DQ check is `FAIL` |
+
+```bash
+pip install mage-ai
+mage start mage_flux                  # open http://localhost:6789 → Pipelines → flux_bookings
+mage run mage_flux flux_bookings      # or run it once from the terminal
+```
+
+Run these from the repo root so Mage can import `flux_pipeline`.
+
+- **Schedule:** the `daily_bookings` trigger runs the pipeline every day.
+- **Re-running:** set the pipeline variable `force` to `true` to reprocess
+  batches that were already loaded. This is safe because the merge never
+  creates duplicates.
+
 ## How it works
 
 ```

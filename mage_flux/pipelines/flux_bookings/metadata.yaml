@@ -1,0 +1,93 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - clean_and_validate
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_new_batches
+  retry_config: null
+  status: not_executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_new_batches
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - merge_into_current_state
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: clean_and_validate
+  retry_config: null
+  status: not_executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_new_batches
+  uuid: clean_and_validate
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - publish_outputs
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: merge_into_current_state
+  retry_config: null
+  status: not_executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - clean_and_validate
+  uuid: merge_into_current_state
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: publish_outputs
+  retry_config: null
+  status: not_executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - merge_into_current_state
+  uuid: publish_outputs
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2026-10-13 08:30:00+00:00'
+data_integration: null
+description: Daily booking batches -> clean -> merge into current state -> output files.
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: flux_bookings
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: flux_bookings
+variables:
+  force: false
+variables_dir: null
+widgets: []

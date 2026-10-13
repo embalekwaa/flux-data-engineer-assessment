@@ -1,0 +1,5 @@
+project_type: standalone
+project_uuid: flux_bookings_project
+variables_dir: ~/.mage_data
+remote_variables_dir: null
+help_improve_mage: false

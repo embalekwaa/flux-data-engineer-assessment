@@ -46,6 +46,11 @@ def load_tables(con: duckdb.DuckDBPyConnection, cfg: Config) -> None:
                                             "updated_at", "_batch_date"])
     staging["check_in_date"] = staging["check_in_date"].dt.date
     staging["check_out_date"] = staging["check_out_date"].dt.date
+    # Microsecond precision (BigQuery's) on every pandas version; pandas 2.x
+    # defaults to ns, which DuckDB won't compare with the DDL's TIMESTAMP columns.
+    for col in ("created_at", "updated_at", "_batch_date"):
+        staging[col] = staging[col].astype("datetime64[us]")
+    raw["_batch_date"] = raw["_batch_date"].astype("datetime64[us]")
     fx = pd.read_csv(cfg.fx_rates_file, parse_dates=["effective_from"])
     fx["effective_from"] = fx["effective_from"].dt.date
     props = pd.read_csv(cfg.properties_file)
